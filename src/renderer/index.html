@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'">
+<title>IBRA GLASS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <!-- ═════ title bar -->
+  <header class="titlebar">
+    <div class="brand">
+      <img src="../../build/icon-256.png" alt="">
+      <div class="brand-txt"><b>IBRA GLASS</b><small data-i18n="tagline"></small></div>
+    </div>
+    <div class="tb-mid">
+      <span id="statusPill" class="pill"><i></i><span></span></span>
+    </div>
+    <div class="tb-actions">
+      <button id="langBtn" class="ghost sm">EN</button>
+      <button class="wbtn" id="wMin" title="—"><svg viewBox="0 0 10 10"><path d="M1 5h8"/></svg></button>
+      <button class="wbtn" id="wMax" title="□"><svg viewBox="0 0 10 10"><rect x="1.5" y="1.5" width="7" height="7"/></svg></button>
+      <button class="wbtn close" id="wClose" title="✕"><svg viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7"/></svg></button>
+    </div>
+  </header>
+
+  <div class="body">
+    <!-- ═════ nav -->
+    <nav class="nav">
+      <button class="navb active" data-page="styles"><svg viewBox="0 0 24 24"><path d="M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v6H4zM13 14h7v6h-7z"/></svg><span data-i18n="nav_styles"></span></button>
+      <button class="navb" data-page="editor"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.6-.8 1.6-1.6 0-.9-.7-1.3-.7-2.1 0-.9.7-1.6 1.6-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/></svg><span data-i18n="nav_editor"></span></button>
+      <button class="navb" data-page="system"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span data-i18n="nav_system"></span></button>
+      <button class="navb" data-page="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span data-i18n="nav_about"></span></button>
+      <div class="nav-foot">
+        <div class="mini-credit">IBRAPROGRAM</div>
+      </div>
+    </nav>
+
+    <main class="main">
+      <!-- ═════════════ STYLES PAGE -->
+      <section class="page active" id="page-styles">
+        <div class="split">
+          <div class="col-preview">
+            <div class="preview-card">
+              <div class="preview-head">
+                <div>
+                  <h2 id="pvName">—</h2>
+                  <p id="pvMeta" class="muted"></p>
+                </div>
+                <div class="seg" id="modeSeg">
+                  <button data-mode="dark" data-i18n="mode_dark"></button>
+                  <button data-mode="light" data-i18n="mode_light"></button>
+                </div>
+              </div>
+              <div class="stage" id="stage"></div>
+              <div class="bg-row" id="bgRow"></div>
+              <div class="apply-row">
+                <button class="primary big" id="applyBtn"></button>
+                <button class="ghost" id="favBtn"></button>
+                <button class="ghost" id="editBtn" data-i18n="edit_this"></button>
+              </div>
+              <p class="hint" id="applyHint"></p>
+            </div>
+          </div>
+          <div class="col-gallery">
+            <div class="gal-head">
+              <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="search" data-i18n-ph="search"></div>
+              <button class="ghost sm" id="randomBtn" data-i18n="random"></button>
+            </div>
+            <div class="chips" id="chips"></div>
+            <div class="grid" id="grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═════════════ EDITOR PAGE -->
+      <section class="page" id="page-editor">
+        <div class="split">
+          <div class="col-preview">
+            <div class="preview-card">
+              <div class="preview-head">
+                <div><h2 data-i18n="editor_title"></h2><p class="muted" data-i18n="editor_sub"></p></div>
+                <div class="seg" id="modeSeg2">
+                  <button data-mode="dark" data-i18n="mode_dark"></button>
+                  <button data-mode="light" data-i18n="mode_light"></button>
+                </div>
+              </div>
+              <div class="stage" id="stage2"></div>
+              <div class="apply-row">
+                <button class="primary big" id="applyBtn2"></button>
+                <button class="ghost" id="saveMine" data-i18n="save_mine"></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-gallery editor">
+            <h3 data-i18n="effect"></h3>
+            <div class="effects" id="effects"></div>
+
+            <div class="tints">
+              <div class="tint" data-k="light">
+                <h3><span data-i18n="tint_light"></span><small data-i18n="tint_light_sub"></small></h3>
+                <div class="tint-row"><input type="color" class="tc"><input class="hex" maxlength="7"></div>
+                <label class="rng"><span data-i18n="opacity"></span><input type="range" min="0" max="255" class="ta"><b class="tav"></b></label>
+              </div>
+              <div class="tint" data-k="dark">
+                <h3><span data-i18n="tint_dark"></span><small data-i18n="tint_dark_sub"></small></h3>
+                <div class="tint-row"><input type="color" class="tc"><input class="hex" maxlength="7"></div>
+                <label class="rng"><span data-i18n="opacity"></span><input type="range" min="0" max="255" class="ta"><b class="tav"></b></label>
+              </div>
+            </div>
+            <div class="swatches" id="swatches"></div>
+
+            <h3 data-i18n="options"></h3>
+            <div class="toggles">
+              <label class="tg"><input type="checkbox" data-opt="clearAddress"><i></i><span><b data-i18n="o_addr"></b><small data-i18n="o_addr_s"></small></span></label>
+              <label class="tg"><input type="checkbox" data-opt="clearBarBg"><i></i><span><b data-i18n="o_bar"></b><small data-i18n="o_bar_s"></small></span></label>
+              <label class="tg"><input type="checkbox" data-opt="clearWinUIBg"><i></i><span><b data-i18n="o_winui"></b><small data-i18n="o_winui_s"></small></span></label>
+              <label class="tg"><input type="checkbox" data-opt="showLine"><i></i><span><b data-i18n="o_line"></b><small data-i18n="o_line_s"></small></span></label>
+            </div>
+
+            <details class="ini">
+              <summary data-i18n="ini_preview"></summary>
+              <pre id="iniPre"></pre>
+            </details>
+
+            <div class="io">
+              <button class="ghost sm" id="importBtn" data-i18n="import"></button>
+              <button class="ghost sm" id="exportBtn" data-i18n="export"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═════════════ SYSTEM PAGE -->
+      <section class="page" id="page-system">
+        <div class="sys">
+          <div class="hero-status" id="heroStatus">
+            <div class="hs-icon"></div>
+            <div><h2 id="hsTitle"></h2><p id="hsSub" class="muted"></p></div>
+            <div class="hs-actions">
+              <button class="primary" id="sysInstall"></button>
+              <button class="ghost" id="sysRestart" data-i18n="restart_explorer"></button>
+            </div>
+          </div>
+          <div class="cards">
+            <div class="card"><h4 data-i18n="c_windows"></h4><p id="cWin">…</p><small id="cWin2" class="muted"></small></div>
+            <div class="card"><h4 data-i18n="c_engine"></h4><p id="cEng">…</p><small class="muted">ExplorerBlurMica · Maplespe</small></div>
+            <div class="card"><h4 data-i18n="c_admin"></h4><p id="cAdm">…</p><small class="muted" data-i18n="c_admin_s"></small></div>
+            <div class="card"><h4 data-i18n="c_location"></h4><p id="cLoc" class="mono">—</p><button class="link" id="openFolder" data-i18n="open_folder"></button></div>
+          </div>
+          <div class="warn" id="foreignWarn" hidden></div>
+          <div class="compat" id="compat"></div>
+          <div class="danger">
+            <div><h4 data-i18n="uninstall_title"></h4><p class="muted" data-i18n="uninstall_sub"></p></div>
+            <label class="chk"><input type="checkbox" id="rmFiles" checked><span data-i18n="rm_files"></span></label>
+            <button class="danger-btn" id="sysUninstall" data-i18n="uninstall"></button>
+          </div>
+          <div class="tip"><b data-i18n="safe_title"></b> <span data-i18n="safe_body"></span></div>
+        </div>
+      </section>
+
+      <!-- ═════════════ ABOUT PAGE -->
+      <section class="page" id="page-about">
+        <div class="about">
+          <img src="../../build/icon-256.png" class="about-logo" alt="">
+          <h1>IBRA GLASS</h1>
+          <p class="muted" id="aboutVer"></p>
+          <p class="lead" data-i18n="about_lead"></p>
+          <div class="credit">
+            <div class="cr-main"><span data-i18n="made_by"></span> <b data-i18n="author"></b></div>
+            <div class="links">
+              <button class="ghost" data-url="https://t.me/ibraprogram">Telegram · t.me/ibraprogram</button>
+              <button class="ghost" data-url="https://www.tiktok.com/@ibraprogram">TikTok · @ibraprogram</button>
+            </div>
+          </div>
+          <div class="engine-credit">
+            <h4 data-i18n="engine_credit_t"></h4>
+            <p data-i18n="engine_credit_b"></p>
+            <div class="links">
+              <button class="ghost sm" data-url="https://github.com/Maplespe/ExplorerBlurMica">github.com/Maplespe/ExplorerBlurMica</button>
+              <button class="ghost sm" data-url="https://www.gnu.org/licenses/lgpl-3.0.html">LGPL-3.0</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- modal / toast / busy -->
+<div class="modal" id="modal" hidden><div class="modal-box"><h3 id="mTitle"></h3><div id="mBody"></div><div class="modal-actions" id="mActions"></div></div></div>
+<div class="busy" id="busy" hidden><div class="spinner"></div><p id="busyTxt"></p></div>
+<div class="toasts" id="toasts"></div>
+
+<script src="themes.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

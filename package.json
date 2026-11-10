@@ -1,0 +1,57 @@
+{
+  "name": "ibra-glass",
+  "productName": "IBRA GLASS",
+  "version": "1.0.0",
+  "description": "IBRA GLASS — زجاج لمستكشف ملفات ويندوز (Blur / Acrylic / Mica)",
+  "main": "src/main.js",
+  "author": "Ibrahim Al-Khazraji (IBRAPROGRAM)",
+  "homepage": "https://t.me/ibraprogram",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "engine": "powershell -ExecutionPolicy Bypass -File scripts/fetch-engine.ps1",
+    "dist": "electron-builder --win nsis --x64 --publish never",
+    "test": "node scripts/test.js"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.ibraprogram.ibraglass",
+    "productName": "IBRA GLASS",
+    "copyright": "© IBRAPROGRAM — Ibrahim Al-Khazraji",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": [
+      "src/**/*",
+      "build/icon.ico",
+      "build/icon-256.png",
+      "package.json"
+    ],
+    "extraResources": [
+      { "from": "engine", "to": "engine", "filter": ["**/*"] }
+    ],
+    "asar": true,
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "build/icon.ico",
+      "requestedExecutionLevel": "requireAdministrator",
+      "artifactName": "IBRA-GLASS-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "IBRA GLASS",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "include": "build/installer.nsh",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
