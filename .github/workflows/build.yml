@@ -46,14 +46,26 @@ jobs:
           name: IBRA-GLASS-Setup
           path: dist/*.exe
 
+      - name: Read app version
+        id: ver
+        shell: pwsh
+        run: |
+          $v = (Get-Content package.json -Raw | ConvertFrom-Json).version
+          "tag=v$v" >> $env:GITHUB_OUTPUT
+
+      # Every push to main publishes/updates the Release for the version in package.json
+      # (bump "version" to make a new Release). Tag pushes work too.
       - name: Publish GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          name: IBRA GLASS ${{ github.ref_name }}
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || steps.ver.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: IBRA GLASS ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || steps.ver.outputs.tag }}
+          make_latest: true
           files: dist/*.exe
           body: |
-            ## IBRA GLASS ${{ github.ref_name }}
+            ## IBRA GLASS ${{ steps.ver.outputs.tag }}
             زجاج لمستكشف ملفات ويندوز — Blur / Acrylic / Mica، أكثر من 40 ستايل جاهز، محرّر ألوان ومعاينة مباشرة.
 
             **التنصيب:** نزّل `IBRA-GLASS-Setup-*.exe` وشغّله، بعدها افتح البرنامج، اختار ستايل، واضغط **ثبّت وطبّق**.
