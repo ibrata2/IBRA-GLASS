@@ -40,6 +40,16 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
         run: npx electron-builder --win nsis --x64 --publish never
 
+      - name: Verify engine is inside the app
+        shell: pwsh
+        run: |
+          $e = "dist/win-unpacked/resources/engine"
+          foreach ($f in @("ExplorerBlurMica.dll","ENGINE_VERSION.txt","ENGINE-LICENSE.txt","ENGINE-COPYING.LESSER.txt")) {
+            if (-not (Test-Path "$e/$f")) { throw "missing $e/$f" }
+          }
+          Get-Content "$e/ENGINE_VERSION.txt"
+          Get-ChildItem dist/*.exe | Format-Table Name, Length
+
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
